@@ -4,16 +4,24 @@ using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyFinance.Models
 {
     public class UsuarioModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Informe o Nome!")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Informe seu Email!")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Informe sua Senha!")]
         public string Senha { get; set; }
-        public DateTime Data_Nascimento { get; set; }
+
+        [Required(ErrorMessage = "Informe sua !")]
+        public string Data_Nascimento { get; set; }
 
 
 
@@ -29,13 +37,22 @@ namespace MyFinance.Models
                 {
                     Id = int.Parse(dt.Rows[0]["ID"].ToString());
                     Nome = dt.Rows[0]["NOME"].ToString();
-                    Data_Nascimento = DateTime.Parse(dt.Rows[0]["DATA_NASCIMENTO"].ToString());
+                    Data_Nascimento = dt.Rows[0]["DATA_NASCIMENTO"].ToString();
 
                     return true;
                 }
             }
 
             return false;
+        }
+
+        public void RegistrarUsuario()
+        {
+            string dataNascimento = DateTime.Parse(Data_Nascimento).ToString("yyyy/MM/dd");
+            string sql = $"INSERT INTO USUARIO (NOME,EMAIL,SENHA,DATA_NASCIMENTO) VALUES ('{Nome}','{Email}','{Senha}','{dataNascimento}')";
+            DAL objDAL = new DAL();
+            objDAL.ExecutarComandoSQL(sql);
+            
         }
 
 

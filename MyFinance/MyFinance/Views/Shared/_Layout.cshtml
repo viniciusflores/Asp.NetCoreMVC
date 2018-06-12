@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MyFinance</a>
+                <a asp-area="" asp-controller="Home" asp-action="Menu" class="navbar-brand">MyFinance</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -85,7 +85,7 @@
         var divNome = document.getElementById("NomeUsuarioLogado");
 
         if (nome != "") {
-            divNome.innerHTML = "Olá " + nome + " <a href='Usuario/Login/0'> (Sair) </a>";
+            divNome.innerHTML = "Olá " + nome + " <a href='../Usuario/Login/0'> (Sair) </a>";
             divNome.style= "color:#ffffff; text-align: right; height:50px; padding-top:13px;"
         }
     }

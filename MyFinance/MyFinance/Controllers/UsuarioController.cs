@@ -29,7 +29,7 @@ namespace MyFinance.Controllers
             {
                 HttpContext.Session.SetString("NomeUsuarioLogado", usuario.Nome);
                 HttpContext.Session.SetString("IdUsuarioLogado", usuario.Id.ToString());
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Menu", "Home");
             }
             else
             {
@@ -38,6 +38,28 @@ namespace MyFinance.Controllers
             }
 
 
+        }
+
+        [HttpPost]
+        public IActionResult Registrar(UsuarioModel usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                usuario.RegistrarUsuario();
+                return RedirectToAction("Sucesso");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Registrar()
+        {
+            return View();
+        }
+
+        public IActionResult Sucesso()
+        {
+            return View();
         }
     }
 }

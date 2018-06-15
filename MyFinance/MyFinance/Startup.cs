@@ -33,10 +33,11 @@ namespace MyFinance
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             services.AddSession();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -16,7 +16,7 @@ namespace MyFinance.Controllers
         {
             HttpContextAccessor = httpContextAccessor;
         }
-        
+
         public IActionResult Index()
         {
             TransacaoModel objTransacao = new TransacaoModel(HttpContextAccessor);
@@ -25,7 +25,7 @@ namespace MyFinance.Controllers
             return View();
         }
 
-      
+
 
         [HttpPost]
         public IActionResult Registrar(TransacaoModel formulario)
@@ -55,8 +55,13 @@ namespace MyFinance.Controllers
             return View();
         }
 
-        public IActionResult Extrato()
+        [HttpGet]
+        [HttpPost]
+        public IActionResult Extrato(TransacaoModel formulario)
         {
+            formulario.HttpContextAccessor = HttpContextAccessor;
+            ViewBag.ListaTransacao = formulario.ListaTransacao();
+            ViewBag.ListaContas = new ContaModel(HttpContextAccessor).ListaConta();
             return View();
         }
 
@@ -65,6 +70,24 @@ namespace MyFinance.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ExcluirTransacao(int id)
+        {
+            TransacaoModel objTransacao = new TransacaoModel(HttpContextAccessor);
+            ViewBag.Registro = objTransacao.CarregarRegistro(id);
+            return View();
+            
+        }
+
+        [HttpGet]
+        public IActionResult Excluir(int id)
+        {
+            TransacaoModel objTransacao = new TransacaoModel(HttpContextAccessor);
+            objTransacao.Excluir(id);
+            return RedirectToAction("Index");
+        }
+
+        
 
     }
 }

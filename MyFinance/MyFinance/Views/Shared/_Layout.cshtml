@@ -30,7 +30,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Menu">Menu</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
@@ -86,7 +86,11 @@
 
         if (nome != "") {
             divNome.innerHTML = "Olá " + nome + " <a href='../Usuario/Login/0'> (Sair) </a>";
-            divNome.style= "color:#ffffff; text-align: right; height:50px; padding-top:13px;"
+            divNome.style = "color:#ffffff; text-align: right; height:50px; padding-top:13px;"
+        }
+        else {
+            window.location.href = '../Usuario/Login';
+
         }
     }
 </script>

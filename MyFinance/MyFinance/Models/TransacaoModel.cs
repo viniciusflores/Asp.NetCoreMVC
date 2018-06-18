@@ -153,5 +153,46 @@ namespace MyFinance.Models
 
 
         }
+
+        
+    }
+
+    public class Dashboard
+    {
+        public double Total { get; set; }
+        public string Plano_conta { get; set; }
+        public IHttpContextAccessor HttpContextAccessor { get; set; }
+
+        public Dashboard()
+        {
+        }
+
+        public Dashboard(IHttpContextAccessor httpContextAccessor)
+        {
+            HttpContextAccessor = httpContextAccessor;
+        }
+
+        public List<Dashboard> RetornarDadosGraficoPie()
+        {
+            List<Dashboard> lista = new List<Dashboard>();
+            Dashboard item;
+            string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
+            string sql = $"SELECT sum(t.Valor) as Total, p.descricao FROM transacao as t " +
+                $"inner join plano_contas as p on t.plano_contas_id = p.id " +
+                $"where t.tipo = 'D' and t.usuario_id={id_usuario_logado} group by p.descricao";
+            DAL objDAL = new DAL();
+            DataTable dt = new DataTable();
+            dt = objDAL.RetDataTable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new Dashboard();
+                item.Total = double.Parse(dt.Rows[i]["Total"].ToString());
+                item.Plano_conta = dt.Rows[i]["Descricao"].ToString();
+                lista.Add(item);
+            }
+            return lista;
+
+        }
     }
 }

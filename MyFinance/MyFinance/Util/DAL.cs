@@ -5,17 +5,19 @@ using System.Threading.Tasks;
 //Metodos importados pós nugget
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Data.Sql;
 
 namespace MyFinance.Util
 {
     public class DAL
     {
         //Dados de Conexão
-        private static string server = "localhost";
+        private static string server = "servermysql18vinicius.mysql.database.azure.com";
         private static string database = "financeiro";
-        private static string user = "root";
-        private static string password = "";
-        private string connectionString = $"Server={server};Database={database};Uid={user};Pwd={password};SslMode=none";
+        private static string user = "viniciusflores@servermysql18vinicius";
+        private static string password = "CG11depre";
+        private string connectionString = $"Server={server};Database={database};Uid={user};Pwd={password}";
+       
         private MySqlConnection connection;
 
         //metodo construtor
